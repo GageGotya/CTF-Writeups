@@ -9,7 +9,6 @@ Each folder contains:
 - Challenge description
 - Tools used
 - Exploitation steps
-- Flags captured
 - Lessons learned
 
 ---
