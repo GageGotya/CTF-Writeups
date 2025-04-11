@@ -43,7 +43,7 @@ nmap -sC -sV <target-ip>
 
 ### 🔍 Page Source
 
-Found credential clue:
+Found credential clue in home page source code:
 
 ```text
 Username: RickRul3s
@@ -82,7 +82,7 @@ ls
 cat clue.txt
 ```
 
-Discovered hint and directories leading to first ingredient.
+Discovered hint and directories leading to first ingredient. Realize cat is not usable.
 
 ---
 
@@ -91,7 +91,7 @@ Discovered hint and directories leading to first ingredient.
 Found file and used:
 
 ```bash
-less /home/rick/cmd
+less clue.txt
 ```
 
 🧪 **Ingredient 1:** `mr. meeseek hair`
@@ -103,10 +103,8 @@ less /home/rick/cmd
 Navigated to Rick’s home:
 
 ```bash
-cd /home/rick
-ls
-pwd
-less "second ingredients"
+cd /home/rick; ls; pwd
+less /home/rick/"second ingredients"; ls
 ```
 
 🧪 **Ingredient 2:** `1 jerry tear`
@@ -125,7 +123,6 @@ Found permission to list and read `/root/`:
 
 ```bash
 sudo ls /root
-sudo less /root/3rd.txt
 ```
 
 ---
@@ -161,6 +158,6 @@ sudo less /root/3rd.txt
 | File                   | Description                              |
 |------------------------|------------------------------------------|
 | `robots.txt`           | Hidden directory revealed                |
-| `cmd`                  | File with first ingredient               |
+| `source code`          | Hidden username in comments              |
 | `second ingredients`   | File with second ingredient              |
 | `/root/3rd.txt`        | Root-only file with final ingredient     |
