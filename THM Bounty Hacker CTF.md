@@ -65,7 +65,7 @@ ftp> get task.txt
 
 #### 📄 locks.txt
 
-Custom password list found — likely reused credentials.
+Custom password list found which are likely reused credentials.
 
 ---
 
