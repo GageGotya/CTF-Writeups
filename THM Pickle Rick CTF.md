@@ -10,7 +10,7 @@
 
 ## 📘 Overview
 
-This Rick and Morty-themed room tasks you with helping Rick transform back from a pickle into a human by collecting three secret ingredients.  
+This Rick and Morty themed room tasks you with helping Rick transform back from a pickle into a human by collecting three secret ingredients.  
 You'll perform enumeration, exploit command injection, and escalate privileges to recover all ingredients and save Rick.
 
 > 💡 A fun and clever room that introduces web fuzzing, command injection, and Linux privilege escalation.
