@@ -1,7 +1,7 @@
 # 🏴‍☠️ TryHackMe - Bounty Hacker
 
 **Platform:** TryHackMe  
-**Challenge Type:** Boot2Roo  
+**Challenge Type:** Boot2Root 
 **Author:** Gage Ayala ([@GageGotya](https://github.com/GageGotya))  
 **Date:** April 9, 2025  
 **Difficulty:** ⭐ Easy  
