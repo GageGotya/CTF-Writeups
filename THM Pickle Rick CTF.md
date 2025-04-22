@@ -1,6 +1,6 @@
 # 🥒 TryHackMe - Pickle Rick
 
-**Platform:** TryHackM  
+**Platform:** TryHackMe  
 **Challenge Type:** Boot2Root  
 **Author:** Gage Ayala ([@GageGotya](https://github.com/GageGotya))  
 **Date:** April 11, 2025  
